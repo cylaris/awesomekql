@@ -7,7 +7,7 @@ Rules like these can be implemented into SIEM solutions from Elastic to Sentinel
 
 \For inexperienced viewers, please see the next section. Otherwise, see section titled purpose.
 
-##What are rules?
+## What are rules?
 Rules are the name given to a set of pre-defined queries which continually search for malicious, suspicious or unauthorised activity on a computer network. These are put into an IDS system, usually a SIEM, which is hooked up to the vast majority of the network, such as domain controllers, fileservers, active directory, azure or aws, 365, google, firewalls and any other service utilised by your organisation.
 The rules are then automatically and constantly searching the network (depending on your set-up or differing siem software) for activity DEEMED bad by the security team. For example, in Azure Sentinel
   SecurityEvent
@@ -22,9 +22,9 @@ keep in mind, this does not show only interactive logon failures aka, pebdac, us
 annoying old webservers and domain controllers, broken service accounts which may fall under network logons, but may help in identifying these issues
 to resolve them from a config POV.
 
-##What is the purpose of this repo?
+## What is the purpose of this repo?
 BaseDFIR seeks to help others, as well as polish our own skillsets. This repo is a great resource for those looking for extra security rules and serves
 us great purpose when the community submits suggestions and edits to our rules, teaching us too a lesson or two. 
 
-###References
+### References
 Florian Roth, Sigma https://github.com/Neo23x0
