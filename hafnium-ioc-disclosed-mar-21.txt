@@ -1,4 +1,5 @@
-haha-ha-hafnium
+Azure Sentinel Queries/ rules for Hafnium detection...
+haha-ha-hafnium... detection
 
 Windows | where ((Image contains '\\UMWorkerProcess.exe') and ((TargetFilename contains 'CacheCleanup.bin' or TargetFilename contains '.txt' or TargetFilename contains '.log' or TargetFilename contains '.cfg' or TargetFilename contains 'cleanup.bin')))
 
