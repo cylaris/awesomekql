@@ -1,0 +1,6 @@
+AppInstaller.exe [Download] sys binary abuse detection
+AppInstaller is a windows system CLI application that is under normal circumstances used to sideload winapps.
+
+Azure Sentinel:
+Sysmon
+| where (CommandLine contains "start ms-appinstaller://?source=https") or (CommandLine contains "timeout" and CommandLine contains "ms-appinstaller") or (CommandLine contains "taskkill" and CommandLine contains "appinstaller.exe")
