@@ -1,0 +1,5 @@
+haha-ha-hafnium
+
+Windows | where ((Image contains '\\UMWorkerProcess.exe') and ((TargetFilename contains 'CacheCleanup.bin' or TargetFilename contains '.txt' or TargetFilename contains '.log' or TargetFilename contains '.cfg' or TargetFilename contains 'cleanup.bin')))
+
+Sysmon | where (((EventID in ('4688','1') and (ParentProcessName contains '\\UMWorkerProcess.exe')) and ((NewProcessName contains '\\wermgr.exe' or NewProcessName contains '\\werfault.exe')))
