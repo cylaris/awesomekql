@@ -1,9 +1,8 @@
-# Universal SIGMA SIEM Intrusion Detection rules
+# Azure Sentinel SIEM detection rules
 
 
 ## Description
-SIGMA is a relatively new, and vendor-neutral rule writing language, developed by Florian Roth @Neo23x0, it is truly revolutionary. 
-Rules like these can be implemented into SIEM solutions from Elastic to Sentinel to Qradar and Splunk, chances are, if you have a SIEM solution you'll be able to make good use of SIGMA.
+Some Azure Sentinel SIEM detection rules will commence being published here for large vulnerabilities and exploits.
 
 \For inexperienced viewers, please see the next section. Otherwise, see section titled purpose.
 
@@ -25,6 +24,3 @@ to resolve them from a config POV.
 ## What is the purpose of this repo?
 BaseDFIR seeks to help others, as well as polish our own skillsets. This repo is a great resource for those looking for extra security rules and serves
 us great purpose when the community submits suggestions and edits to our rules, teaching us too a lesson or two. 
-
-### References
-Florian Roth, Sigma https://github.com/Neo23x0
