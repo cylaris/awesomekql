@@ -1,0 +1,6 @@
+Cscript.exe [ADS]
+Cscript.exe executing files from alternate data streams, in this case a VBS script being executed from an ADS.
+
+Azure Sentinel:
+Sysmon
+| where (CommandLine contains "cscript" and CommandLine matches regex ".:.*\\.txt:.*\\.vbs")
