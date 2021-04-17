@@ -1,0 +1,10 @@
+Findstr.exe [ADS, credentials, download]
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sysmon
+// detection of recursive searching of xml files in sysvol using findstr
+| where (CommandLine contains "findstr" and CommandLine contains "/S" and CommandLine contains "/I" and CommandLine matches regex "\\\\sysvol\\policies\\*\.xml$")
+// create your own projections
+
+Sysmon
+// detection of findstr writing executable to ADS 
+| where CommandLine contains "findstr /V /L" and CommandLine matches regex "([a-zA-Z0-9]*?)\\s.:\\.*?\\.exe\\s>\\s.:\\.*?\\.txt:.*?\\.exe"
