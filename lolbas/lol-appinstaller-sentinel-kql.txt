@@ -3,4 +3,25 @@ AppInstaller is a windows system CLI application that is under normal circumstan
 
 Azure Sentinel:
 Sysmon
+// This rule searches for abnormal HTTPS use of MS appinstaller
 | where (CommandLine contains "start ms-appinstaller://?source=https") or (CommandLine contains "timeout" and CommandLine contains "ms-appinstaller") or (CommandLine contains "taskkill" and CommandLine contains "appinstaller.exe")
+
+In this rule im searching the Sysmon datatable, hence the Sysmon at the start, | where is literally where x or where y, Column x. So in this rule we are searching for the Sysmon table 
+| where the CommandLine column (which is a parsed section of the raw log containing only commandline commands) contains "start ms-appinstaller://?source=https" is essentially looking for this value being typed into CMD or Powershell for example. ms-appinstaller is intended for sysadmins for ease of rolling out apps to the wider organisation but has failed to gain wider adoption than what it was scoped for but attackers definitely liked it, in this case, the commandline will be the result of appinstaller attempting to install packages from a remote https source or website.
+
+In this rule we also use rounded brackets () to seperate content, all it does is make the rule have options.
+
+So instead of having 
+
+CommandLine contains "start ms-appinstaller://?source=https" or CommandLine contains "timeout" and CommandLine contains "ms-appinstaller" or CommandLine contains "taskkill" and CommandLine contains "appinstaller.exe"
+
+We employ the brackets to define to whoever is looking at an alert or tuning the rule the different sections that will fire the rule, just like developers have similar practices. We can also use //this line is commented out, to comment out statements we don't want the siem to process. 
+
+| where 
+Potential Fire 1 (CommandLine contains "start ms-appinstaller://?source=https")
+or 
+Potential Fire 2 (CommandLine contains "timeout" and CommandLine contains "ms-appinstaller")
+or 
+Potential Fire 3 (CommandLine contains "taskkill" and CommandLine contains "appinstaller.exe")
+
+Potential Fire 1-3 indicates all of the possible attributes of an event that could fire this alert, hence the use of brackets to make it user to identify.
