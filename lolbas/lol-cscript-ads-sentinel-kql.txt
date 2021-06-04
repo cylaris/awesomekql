@@ -1,6 +1,48 @@
 Cscript.exe [ADS]
 Cscript.exe executing files from alternate data streams, in this case a VBS script being executed from an ADS.
 
-Azure Sentinel:
+
+Azure Sentinel Rule Queries:
+
 Sysmon
-| where (CommandLine contains "cscript" and CommandLine matches regex ".:.*\\.txt:.*\\.vbs")
+| where (CommandLine contains "cscript" and CommandLine matches regex "(?i).:..*?\\.txt:.*?\\.vbs")
+
+Sysmon
+| where (CommandLine contains "cscript" and CommandLine matches regex "(?i).:.\\\\w+\\\\w+\\.txt:\\w+\\.vbs")
+
+
+
+
+
+Here, we are again searching sysmon, as it is one of the main log source used by many cyber professionals around the world.
+This is declared using 
+Sysmon
+
+| where indicates we are searching where x ocurrs.
+
+In this example it is much simpler than it looks as we are looking for a value typed into the commandline that explicitly calls cscript (CommandLine contains "cscript") section.
+
+CommandLine matches regex will declare our use of regex.
+
+The actual regex within the speech marks goes as follows.
+
+(?i) Allows case insensitive matching.
+
+.:. Is searching for a drive followed by a backslash, such as C:\
+
+.*? Is literally saying, match everything up until our next match, which will be below.
+
+Our next match is the .txt (ending of a called txt file in commandline), we match using \\.txt since you have to escape '.' in regex, and in Sentinel (KQL) you have to escape the escape, confusing I know but essentially you are telling the regex that you don't want to match . which is a metachar for any single character, or \ itself so you are just matching . literally with \\.
+
+: Matches : literally as it is not a metachar
+
+.*? again matches everyhing up until x (the next match)
+
+\\.vbs matches .vbs, just like with .txt above, '.' as a metachar in regex is escaped with a double \\ in KQL regex .
+
+So overall we are trying to match: cscript c:\ads\file.txt:script.vbs
+
+We could even use something like:
+
+Sysmon
+| where (CommandLine contains "cscript" and CommandLine matches regex "(?i).:.\\\\w+\\\\w+\\.txt:\\w\\.vbs")
