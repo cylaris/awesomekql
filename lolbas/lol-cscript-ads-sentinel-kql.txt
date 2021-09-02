@@ -45,4 +45,4 @@ So overall we are trying to match: cscript c:\ads\file.txt:script.vbs
 We could even use something like:
 
 Sysmon
-| where (CommandLine contains "cscript" and CommandLine matches regex "(?i).:.\\\\w+\\\\w+\\.txt:\\w\\.vbs")
+| where (CommandLine contains "cscript" and CommandLine matches regex "(?i)\\.:\\.\\\\w+\\\\w+\\.txt:\\w\\.vbs")
