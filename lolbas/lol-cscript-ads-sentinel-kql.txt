@@ -5,10 +5,10 @@ Cscript.exe executing files from alternate data streams, in this case a VBS scri
 Azure Sentinel Rule Queries:
 
 Sysmon
-| where (CommandLine contains "cscript" and CommandLine matches regex "(?i).:..*?\\.txt:.*?\\.vbs")
+| where (CommandLine contains "cscript" and CommandLine matches regex "(?i)\\.:\\.\\.*?\\.txt:.*?\\.vbs")
 
 Sysmon
-| where (CommandLine contains "cscript" and CommandLine matches regex "(?i).:.\\\\w+\\\\w+\\.txt:\\w+\\.vbs")
+| where (CommandLine contains "cscript" and CommandLine matches regex "(?i)\\.:\\.\\\\w+\\\\w+\\.txt:\\w+\\.vbs")
 
 
 
