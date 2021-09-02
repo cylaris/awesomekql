@@ -7,4 +7,4 @@ Sysmon
 
 Sysmon
 // detection of findstr writing executable to ADS 
-| where CommandLine contains "findstr /V /L" and CommandLine matches regex "([a-zA-Z0-9]*?)\\s.:\\.*?\\.exe\\s>\\s.:\\.*?\\.txt:.*?\\.exe"
+| where CommandLine contains "findstr /V /L" and CommandLine matches regex "([a-zA-Z0-9]*?)\\s\\.:\\.*?\\.exe\\s>\\s.:\\.*?\\.txt:.*?\\.exe"
