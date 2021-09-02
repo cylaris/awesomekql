@@ -1,6 +1,6 @@
 # Azure Sentinel SIEM detection rules
 
-Please note these rules are built by me in my own time and are not in any way related to CyberGuard and you can use them as you like given the open source license.
+Please note these rules are built by me in my own time and are not in any way related to StripeOLT and you can use them as you like given the open source license.
 
 ## Description
 Some Azure Sentinel SIEM detection rules will commence being published here for large vulnerabilities and exploits.
