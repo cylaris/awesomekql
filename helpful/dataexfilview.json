@@ -1,0 +1,8 @@
+A nice way to view volume of data, IPs from the 'Data exfiltration to an app that is not sanctioned' alert from MCAS.
+
+SecurityAlert
+| where DisplayName =~ "Data exfiltration to an app that is not sanctioned"
+| extend ["Associated User Account"] = tostring(parse_json(Entities)[1].Name)
+| extend ["Associated Cloud App"] = tostring(parse_json(Entities)[0].Name)
+| parse kind=regex Description with * '.*?The IP address 'IPAddress'uploaded 'strUploadVolume'\\.'
+| project TimeGenerated, DisplayName, AlertType, ['Associated User Account'], ['Associated Cloud App'], IPAddress, strUploadVolume
