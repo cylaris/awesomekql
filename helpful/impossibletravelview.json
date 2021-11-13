@@ -1,0 +1,13 @@
+// A better way to view impossible travel alerts from MCAS :)
+SecurityAlert
+| where DisplayName =~ "Impossible Travel Activity"
+| extend 
+    ["IP Addresses"] = tostring(parse_json(ExtendedProperties).["IP Addresses"]),
+    Countries = tostring(parse_json(ExtendedProperties).Countries)
+| extend 
+    ["Standard Location"] = trim_end(',.*?',Countries),
+    ["New Location"] = trim_start('.*?,\\s',Countries),
+    ["Impacted Applications"] = tostring(parse_json(ExtendedProperties).["Cloud Applications"]),
+    Timeframe_p = trim_start('.*?within\\s',Description)
+| extend Timeframe = trim_end('\\..*?',Timeframe_p)
+| project TimeGenerated, tostring(DisplayName), tostring(CompromisedEntity), tostring(Tactics), tostring(Status), tostring(['IP Addresses']), ['Impacted Applications'], ['Standard Location'], ['New Location'], Timeframe
