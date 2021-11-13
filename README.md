@@ -1,4 +1,4 @@
-# Azure Sentinel SIEM detection rules
+# Azure Sentinel SIEM, awesome kql
 
 Please note these rules are built by me in my own time and are not in any way related to StripeOLT and you can use them as you like given the open source license.
 
