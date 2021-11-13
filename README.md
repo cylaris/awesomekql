@@ -3,7 +3,7 @@
 Please note these rules are built by me in my own time and are not in any way related to StripeOLT and you can use them as you like given the open source license.
 
 ## Description
-Some Azure Sentinel SIEM detection rules will commence being published here for large vulnerabilities and exploits.
+Some Azure Sentinel KQL will be dumped here to help others on their journey. 
 
 For inexperienced viewers I will start to break down these rules into how exactly they work as well as publishing new rules to help cope with the latest security incidents for your SOC.
 
