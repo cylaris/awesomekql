@@ -1,4 +1,5 @@
 // A better way to view impossible travel alerts from MCAS :)
+// Columns projected include, Time, Alert Name, User, MITRE, Alert Status, IPs associated, Cloud apps used, First (Standard) location, New location, the timeframe in which this happened
 SecurityAlert
 | where DisplayName =~ "Impossible Travel Activity"
 | extend 
