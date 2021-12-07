@@ -1,6 +1,0 @@
-// DFE - Threat Hunting for Potentially Spoofed Emails (inbound/ failed dmarc)
-EmailEvents
-|where Timestamp > ago (7d)
-| project Timestamp, AR=parse_json(AuthenticationDetails) , NetworkMessageId, EmailDirection, Subject, SenderFromAddress, SenderIPv4,ThreatTypes, DetectionMethods, ThreatNames, SenderMailFromDomain, RecipientEmailAddress, DeliveryAction
-| evaluate bag_unpack(AR)
-| where (DMARC == "fail" and EmailDirection == "Inbound" and DeliveryAction in ("Delivered", "Unknown"))
