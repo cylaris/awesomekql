@@ -13,3 +13,5 @@ You can use as mentioned in my article the website: https://kustoking.com which 
 These are some kql dumps for Azure Sentinel analytics, these help detect bad behaviour within a network. Folder titled 'lolbas' contains rules surrounding abuse of system binaries which is becoming increasingly common for threat actors to use throughout the attack, from initial access -> exfiltration, as they are much less detected, than say a generic malware.exe 
 
 In the root folder you will find rules surrounding recent breaches/ exploits/ vulnerabilities. 
+
+https://basedfir.com
