@@ -1,0 +1,11 @@
+// Detects DMARC fails, potential spoofed emails in DATP that were delivered inbound
+EmailEvents
+|where Timestamp > ago (7d)
+| project Timestamp, AR=parse_json(AuthenticationDetails) , NetworkMessageId, EmailDirection, Subject, SenderFromAddress, SenderIPv4,ThreatTypes, DetectionMethods, ThreatNames, SenderMailFromDomain, RecipientEmailAddress, DeliveryAction
+| evaluate bag_unpack(AR)
+| where (DMARC == "fail" and EmailDirection == "Inbound" and DeliveryAction in ("Delivered", "Unknown"))
+// different summarizes
+//| summarize count() by SenderIPv4
+//| summarize count() by SenderFromAddress
+//|summarize count() by SenderMailFromDomain
+//| sort by count_ desc
