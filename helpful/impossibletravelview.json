@@ -23,7 +23,6 @@ let mfaPortals = dynamic(["Azure Portal", "Office365 Shell WCSS-Client", "Office
 // Grab IP addresses from MCAS impossible travel alert (only NEW IPs)
 let mcasIPs =
 SecurityAlert
-// Swap out the timeframe to what suits your ORG... 100d was good for testing on mass data for me
 | where TimeGenerated > ago (100d)
 | where DisplayName =~ "Impossible Travel Activity"
 // Grab IP addresses associated
@@ -39,13 +38,20 @@ SecurityAlert
 | mvexpand NewIPAddresses
 // Show only these New IP addresses
 | project NewIPAddresses;
+// Grab Mcasusers
+let mcasUsers = 
+SecurityAlert
+| where DisplayName !~ "Impossible travel activity"
+| extend mcasuser = tostring(CompromisedEntity)
+| summarize by mcasuser
+| project mcasuser;
 // Join signinlogs table
 SigninLogs
 // Where successful logon but not MFA
 | where ResultType == 0 and AuthenticationRequirement !~ "multiFactorAuthentication"
 // Pull where device is managed by the organisation
 | extend isManaged = tostring(DeviceDetail.isManaged)
-// Final criteria (where Device is not managed, where Portal is an MFA portal and the IP address is an MCAS New IP address
-| where (isManaged !~ "true" and AppDisplayName in~ (mfaPortals) and IPAddress in~ (mcasIPs))
+// Final criteria (where Device is not managed, where Portal is an MFA portal and the IP address is an MCAS New IP address, and user is from MCAS alert)
+| where (isManaged !~ "true" and AppDisplayName in~ (mfaPortals) and IPAddress in~ (mcasIPs) and UserPrincipalName in~ (mcasUsers))
 
 KQL Queries written by C Coller
