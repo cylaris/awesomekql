@@ -12,4 +12,6 @@ SecurityAlert
     ["Impacted Applications"] = tostring(parse_json(ExtendedProperties).["Cloud Applications"]),
     Timeframe_p = trim_start('.*?within\\s',Description)
 | extend Timeframe = trim_end('\\..*?',Timeframe_p)
-| project TimeGenerated, tostring(DisplayName), tostring(CompromisedEntity), tostring(Tactics), tostring(Status), tostring(['IP Addresses']), ['Impacted Applications'], ['Standard Location'], ['New Location'], Timeframe
+| extend ["Standard IP Address"] = trim_end(', .*?', ['IP Addresses'])
+| extend ["New IP Address(s)"] = trim_start('.*?, ', ['IP Addresses'])
+| project TimeGenerated, tostring(DisplayName), tostring(CompromisedEntity), tostring(Description), tostring(Tactics), tostring(Status), ['Standard IP Address'], ['New IP Address(s)'], ['Standard Location'], ['New Location'] ,['Impacted Applications'], Timeframe
