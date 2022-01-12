@@ -15,3 +15,36 @@ SecurityAlert
 | extend ["Standard IP Address"] = trim_end(', .*?', ['IP Addresses'])
 | extend ["New IP Address(s)"] = trim_start('.*?, ', ['IP Addresses'])
 | project TimeGenerated, tostring(DisplayName), tostring(CompromisedEntity), tostring(Description), tostring(Tactics), tostring(Status), ['Standard IP Address'], ['New IP Address(s)'], ['Standard Location'], ['New Location'] ,['Impacted Applications'], Timeframe
+
+The alternative, threat hunting MCAS query: (Non-managed device, non-MFA sign-on, Successful logon, New IP address, MFA enforcing portal)
+
+// Common portals where MFA is enforced
+let mfaPortals = dynamic(["Azure Portal", "Office365 Shell WCSS-Client", "OfficeHome"]);
+// Grab IP addresses from MCAS impossible travel alert (only NEW IPs)
+let mcasIPs =
+SecurityAlert
+| where TimeGenerated > ago (100d)
+| where DisplayName =~ "Impossible Travel Activity"
+// Grab IP addresses associated
+| extend 
+    ["IP Addresses"] = tostring(parse_json(ExtendedProperties).["IP Addresses"]),
+    Countries = tostring(parse_json(ExtendedProperties).Countries)
+// Seperate current and new (impossible travel) IP address
+| extend StandardIPAddress = trim_end(', .*?', ['IP Addresses'])
+| extend NewIPAddresses = trim_start('.*?, ', ['IP Addresses'])
+// Make array from csv IP addresses
+| extend parse_csv(NewIPAddresses)
+// Expand array
+| mvexpand NewIPAddresses
+// Show only these New IP addresses
+| project NewIPAddresses;
+// Join signinlogs table
+SigninLogs
+// Where successful logon but not MFA
+| where ResultType == 0 and AuthenticationRequirement !~ "multiFactorAuthentication"
+// Pull where device is managed by the organisation
+| extend isManaged = tostring(DeviceDetail.isManaged)
+// Final criteria (where Device is not managed, where Portal is an MFA portal and the IP address is an MCAS New IP address
+| where (isManaged !~ "true" and AppDisplayName in~ (mfaPortals) and IPAddress in~ (mcasIPs))
+
+KQL Queries written by C Coller
