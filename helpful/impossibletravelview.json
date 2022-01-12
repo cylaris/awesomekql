@@ -1,4 +1,4 @@
-A better way to view impossible travel alerts from MCAS :)
+A better way to view impossible travel alerts from MCAS :) - Below that is a Threat Hunting rule for MCAS based alerts it is \not\ perfect!
 Columns projected include, Time, Alert Name, User, MITRE, Alert Status, IPs associated, Cloud apps used, First (Standard) location, New location, the timeframe in which impossible travel happened
 
 SecurityAlert
