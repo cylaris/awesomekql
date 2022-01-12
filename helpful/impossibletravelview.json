@@ -1,4 +1,4 @@
-A better way to view impossible travel alerts from MCAS :) - Below that is a Threat Hunting rule for MCAS based alerts it is \not\ perfect!
+A better way to view impossible travel alerts from MCAS :) - Below that is a Threat Hunting rule for MCAS based alerts it is \not\ perfect! :D
 Columns projected include, Time, Alert Name, User, MITRE, Alert Status, IPs associated, Cloud apps used, First (Standard) location, New location, the timeframe in which impossible travel happened
 
 SecurityAlert
@@ -23,6 +23,7 @@ let mfaPortals = dynamic(["Azure Portal", "Office365 Shell WCSS-Client", "Office
 // Grab IP addresses from MCAS impossible travel alert (only NEW IPs)
 let mcasIPs =
 SecurityAlert
+// Swap out the timeframe to what suits your ORG... 100d was good for testing on mass data for me
 | where TimeGenerated > ago (100d)
 | where DisplayName =~ "Impossible Travel Activity"
 // Grab IP addresses associated
