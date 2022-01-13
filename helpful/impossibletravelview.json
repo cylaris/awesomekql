@@ -26,10 +26,8 @@ SecurityAlert
 | where TimeGenerated > ago (100d)
 | where DisplayName =~ "Impossible Travel Activity"
 // Grab IP addresses associated
-| extend 
-    ["IP Addresses"] = tostring(parse_json(ExtendedProperties).["IP Addresses"]),
-    Countries = tostring(parse_json(ExtendedProperties).Countries)
-// Seperate current and new (impossible travel) IP address
+| extend ["IP Addresses"] = tostring(parse_json(ExtendedProperties).["IP Addresses"])
+    // Seperate current and new (impossible travel) IP address
 | extend StandardIPAddress = trim_end(', .*?', ['IP Addresses'])
 | extend NewIPAddresses = trim_start('.*?, ', ['IP Addresses'])
 // Make array from csv IP addresses
