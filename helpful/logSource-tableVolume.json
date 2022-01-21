@@ -1,0 +1,7 @@
+//Quickly see the volume of log sources in your Sentinel deployment (via tables)
+// search operator, search all $tables unless defined, * is a wildcard for everything. So search all tables for everything.
+search *
+// Summarize each log by its $table (log source/ table) $table directly relates to its log source
+| summarize count() by $table
+// Sort by noisiest <
+| sort by count_ desc
