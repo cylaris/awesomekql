@@ -1,0 +1,7 @@
+A query to quickly see the largest tables in your sentinel instance by volume (and therefore log source ingestion rates)
+// search * = search (all log sources unless defined), * = wildcard for anything (so all logs) 
+search * 
+// when using search argument, $table column is present to distinguish between tables *(and therefore log sources)
+| summarize count() by $table
+// sort by the highest count of logs per $table <
+| sort by count_ desc
