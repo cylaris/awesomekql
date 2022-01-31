@@ -1,4 +1,6 @@
-# Azure Sentinel SIEM, awesome kql
+![alt text](https://static.wixstatic.com/media/fa2da5_a22354e11ada4292a79e0f8c2289b31b~mv2.png/v1/fill/w_243,h_113,al_c,q_85,usm_0.66_1.00_0.01/Monochrome%20on%20Transparent_edited.webp)
+
+# Azure Security Suite - Awesome KQL
 
 Please note these rules are built by me in my own time and are not in any way related to StripeOLT and you can use them as you like given the open source license.
 
