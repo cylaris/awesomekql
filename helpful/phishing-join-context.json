@@ -4,3 +4,4 @@ EmailUrlInfo
 | join EmailEvents on NetworkMessageId
 //| where Url matches regegex @'\\w+\\.({\\w{0-3}\\w{0-3}(?))'
 //| where Url in~ (variableWatchlist)
+// btw regex hasn't been tested, built it whilst putting this on GH
