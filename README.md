@@ -16,4 +16,4 @@ These are some kql dumps for Azure Sentinel analytics, these help detect bad beh
 
 In the root folder you will find rules surrounding recent breaches/ exploits/ vulnerabilities. 
 
-https://basedfir.com
+https://cylaris.org
