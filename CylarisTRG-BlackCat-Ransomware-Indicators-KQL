@@ -9,3 +9,4 @@ DeviceProcessEvents
     or InitiatingProcessCommandLine matches regex @'(?i)vssadmin(\.exe)? delete shadows /all /quiet'
     or InitiatingProcessCommandLine matches regex @'(?i)tokens=*\\" %1 in (.wevtutil.exe el.) DO wevtutil.exe cl \\"%1\\'
     or InitiatingProcessCommandLine matches regex @'(?i)DllHost(\.exe)? /Processid:{3E5FC7F9-9A51-4367-9063-A120244FBEC7}'
+    or InitiatingProcessCommandLine matches regex @'(?i)DllHost(\.exe)? /Processid:{D2E7041B-2927-42fb-8E9F-7CE93B6DC937}'
