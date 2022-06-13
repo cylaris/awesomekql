@@ -1,0 +1,11 @@
+//Cylaris TRG: Blackcat Ransomware Indicators
+//ver 1.0 
+//TLP-AMBER
+//falsepositive-rate:unlikely, unless you're a little trigger happy with ur shadow copies
+//contact:extcomms@cylaris.org 
+DeviceProcessEvents
+| where InitiatingProcessCommandLine matches regex @'(?i).*?\.exe\s--"access-token"\s".*?"'
+    or InitiatingProcessCommandLine contains @'reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters /v MaxMpxCt /d 65535 /t REG_DWORD /f'
+    or InitiatingProcessCommandLine matches regex @'(?i)vssadmin(\.exe)? delete shadows /all /quiet'
+    or InitiatingProcessCommandLine matches regex @'(?i)tokens=*\\" %1 in (.wevtutil.exe el.) DO wevtutil.exe cl \\"%1\\'
+    or InitiatingProcessCommandLine matches regex @'(?i)DllHost(\.exe)? /Processid:{3E5FC7F9-9A51-4367-9063-A120244FBEC7}'
