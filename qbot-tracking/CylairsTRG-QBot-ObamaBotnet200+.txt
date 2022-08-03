@@ -1,0 +1,6 @@
+DeviceProcessEvents
+| where ProcessCommandLine matches regex @'.*?schtasks\.exe.*?/ST'
+| extend schtasks_starttime = tostring(substring(ProcessCommandLine, indexof(ProcessCommandLine, "ST ")+3, 5)), schtasks_endtime = tostring(substring(ProcessCommandLine, indexof(ProcessCommandLine, "ET ")+3, 5)), schtasks_decodedcommand = base64_decode_tostring(tostring(substring(ProcessCommandLine, indexof(ProcessCommandLine, "encodedCommand ")+15)))
+| extend schtasks_starttime = todatetime(schtasks_starttime), schtasks_endtime = todatetime(schtasks_endtime)
+| extend schtasks_datetimeDiff = datetime_diff('minute',schtasks_endtime, schtasks_starttime)
+| where schtasks_datetimeDiff == 11
