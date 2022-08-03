@@ -1,3 +1,9 @@
+//Cylaris TRG: QBot Obama#200/201, Heuristic CommandLine patterns
+//ver 1.2
+//TLP-GREEN
+//falsepositive-rate:unlikely, HIGHLY accurate regex patterns // FOR OBAMA BELOW 200
+//contact:extcomms@cylaris.org
+//references: Ankit Anubhav, pr0xylife
 DeviceProcessEvents
 | where ProcessCommandLine matches regex @'.*?schtasks\.exe.*?/ST'
 | extend schtasks_starttime = tostring(substring(ProcessCommandLine, indexof(ProcessCommandLine, "ST ")+3, 5)), schtasks_endtime = tostring(substring(ProcessCommandLine, indexof(ProcessCommandLine, "ET ")+3, 5)), schtasks_decodedcommand = base64_decode_tostring(tostring(substring(ProcessCommandLine, indexof(ProcessCommandLine, "encodedCommand ")+15)))
