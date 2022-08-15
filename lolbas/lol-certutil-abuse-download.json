@@ -1,0 +1,8 @@
+//Cylaris TRG: LOLBAS Certutil Download observed
+//ver 1.0
+//TLP-WHITE
+//falsepositive-rate:unlikely, but untested in this case so please notify us
+//contact:extcomms@cylaris.org
+DeviceProcessEvents
+| where ProcessCommandLine matches regex @'(?i)certutil(\.exe)? -[urlcache|verifyctl] -[f|split]\s(-[f|split])?(\s)?http(s)?://(www\.)?'
+| extend isAlternateDatastream = tostring(iff(ProcessCommandLine matches regex @'(?i)\w{1}:\\.*?:.{2,5}','true','false'))
