@@ -1,0 +1,8 @@
+/Cylaris TRG: LOLBAS BITSadmin Download observed
+//ver 1.1
+//TLP-WHITE
+//falsepositive-rate:unlikely, very specific regex patterns
+//contact:extcomms@cylaris.org
+DeviceProcessEvents
+// 3 variations of BITSAdmin download detection
+| where (ProcessCommandLine matches regex @'(?i)bitsadmin(\.exe)? /create \d* bitsadmin(\.exe)? /addfile \d* http(s)?://(www\.)?.*?\s[\w{1}:|%\w*%]\\.*?\sbitsadmin /RESUME \d* bitsadmin /complete \d*' or ProcessCommandLine matches regex @'(?i)bitsadmin(\.exe)? /transfer.*?/download.*?http(s)?://(www\.)?.*?(/)?.*?\s[\w:\\|%\w*%]' or ProcessCommandLine matches regex @'(?i)bitsadmin(\.exe)? /transfer \d*\s/priority\s\d*\shttp(s)?://(www.)?.*?\s[\w{1}:|%\w*%]\\')
