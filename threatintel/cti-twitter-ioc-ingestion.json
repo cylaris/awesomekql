@@ -1,0 +1,20 @@
+//Cylaris TRG: Twitter IOC Ingest Inline - Azure Sentinel/MDE TI (mapped ver following...)
+//ver 1.0
+//TLP-AMBER
+//falsepositive-rate:OSINT TI Data - take caution, don't autoblock!
+//contact:extcomms@cylaris.org
+//Thanks to @haha_cker for testing with me
+let twitterIOC = (externaldata(ext_iocs: string) [@"https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/month.csv"]
+    with (format="txt"))
+    | project extURLs=tostring(ext_iocs)
+    | extend arraySplit = split(extURLs, ',')
+    | extend iocReference = tostring(arraySplit[5])
+    | extend tiURL = tostring(iif(arraySplit[2] == 'url', tostring(arraySplit[3]), ''))
+    //remove http(s)?
+    | extend tiURL = trim_start('http(s)?://', tiURL)
+    | extend tiIP = tostring(iif(arraySplit[2] == 'ip', tostring(arraySplit[3]), '')),
+        tiSource = tostring(arraySplit[1]),
+        tiReported_dateTime = tostring(arraySplit[0]),
+        tiClass = tostring(arraySplit[4])
+    | project-away arraySplit;
+twitterIOC
