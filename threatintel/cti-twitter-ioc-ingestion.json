@@ -1,6 +1,6 @@
 //Cylaris TRG: Twitter IOC Ingest Inline - Azure Sentinel/MDE TI (mapped ver following...)
 //ver 1.0
-//TLP-AMBER
+//TLP-WHITE
 //falsepositive-rate:OSINT TI Data - take caution, don't autoblock!
 //contact:extcomms@cylaris.org
 //Thanks to @haha_cker for testing with me
