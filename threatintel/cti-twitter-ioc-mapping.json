@@ -1,0 +1,25 @@
+//Cylaris TRG: Twitter IOC Ingest Inline Mapping - Azure Sentinel
+//ver 1.0
+//falsepositive-rate:OSINT TI Data - take caution, don't autoblock!
+//contact:extcomms@cylaris.org
+//Thanks to @haha_cker for testing with me
+let fp_twitterScrape = dynamic(["firestore.googleapis.com","mobile.twitter.com","m.facebook.com"]);
+let twitterIOC = (externaldata(ip_addr: string) [@"https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/month.csv"]
+    with (format="txt"))
+    | project RemoteIP=tostring(ip_addr)
+    | extend arraySplit = split(RemoteIP, ',')
+    | extend iocReference = tostring(arraySplit[5])
+    | extend tiURL = tostring(iif(arraySplit[2] == 'url', tostring(arraySplit[3]), ''))
+    //remove http(s)?
+    | extend tiURL = trim_start('http(s)?://', tiURL)
+    | extend tiIP = tostring(iif(arraySplit[2] == 'ip', tostring(arraySplit[3]), '')),
+        tiSource = tostring(arraySplit[1]),
+        tiReported_dateTime = tostring(arraySplit[0]),
+        tiClass = tostring(arraySplit[4])
+    | project-away arraySplit;
+twitterIOC | join (DeviceNetworkEvents
+// Change timeframe here for threat hunt
+| where Timestamp > ago(24h)
+| where isnotempty(RemoteIP)
+)
+on $left.tiIP == $right.RemoteIP
