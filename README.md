@@ -14,13 +14,16 @@ We build those to catch the latest vulnerabilities and threats.
 
 The aim for these rules is to use 
 - Network Level IOC's
-  These are a first-effort response which use the earliest possible IOCs uncovered by bad actors exploiting vulnerabilities. Usually unreliable but good    for a first response.
+  
+These are a first-effort response which use the earliest possible IOCs uncovered by bad actors exploiting vulnerabilities. Usually unreliable but good    for a first response.
   
 - Static Indicators
-  Static Indicators are attributes that artifacts have that have been seen historically, again, these are unreliable but can prevent many attacks   nonetheless.
+
+Static Indicators are attributes that artifacts have that have been seen historically, again, these are unreliable but can prevent many attacks   nonetheless.
   
 - Behavioural Patterns (Heuristic)
-  After analysis is carried out on various research, as well as tests, most malware families and even APT's share many similar traits. This is where we   are able to identify these patterns. Most of our detection packs use this - however these take a LOT of time, for research and testing. So you may see us release the previous types initially as a first-effort mitigation and detection.
+
+After analysis is carried out on various research, as well as tests, most malware families and even APT's share many similar traits. This is where we   are able to identify these patterns. Most of our detection packs use this - however these take a LOT of time, for research and testing. So you may see us release the previous types initially as a first-effort mitigation and detection.
 
 ## What's this about?
 Folders contain malware-family or APT specific detection packs. 
