@@ -2,18 +2,29 @@
 
 # Azure Security Suite - Awesome KQL
 
-Please note these rules are built by me in my own time and are not in any way related to StripeOLT and you can use them as you like given the open source license.
+AwesomeKQL is a repository of latest vulnerability research and detection efforts built by mostly @ntwrite from many references for which I am very grateful. 
+
+These detection packs or 'rules' are KQL queries written after various testing of exploits as well as investigation into technical write ups from other vendors, including static analysis and network indicators. 
 
 ## Description
-Some Azure Sentinel/ DATP KQL will be dumped here to help others on their journey. 
 
-For inexperienced viewers I will start to break down these queries into how exactly they work as well as publishing new rules to help cope with the latest security incidents for your SOC.
+KQL is the primary querytype used by Microsoft security stack. Queries are built usually by engineers/ malware analysts etc to catch malicious behaviour on a SIEM to detect malicious behaviour on an environment, at various levels of the MITRE ATT&CK framework.
 
-You can use as mentioned in my article the website: https://kustoking.com which is not maintained by me, however does have some great resources on learning KQL.
+We build those to catch the latest vulnerabilities and threats.
+
+The aim for these rules is to use 
+- Network Level IOC's
+  These are a first-effort response which use the earliest possible IOCs uncovered by bad actors exploiting vulnerabilities. Usually unreliable but good    for a first response.
+  
+- Static Indicators
+  Static Indicators are attributes that artifacts have that have been seen historically, again, these are unreliable but can prevent many attacks   nonetheless.
+  
+- Behavioural Patterns (Heuristic)
+  After analysis is carried out on various research, as well as tests, most malware families and even APT's share many similar traits. This is where we   are able to identify these patterns. Most of our detection packs use this - however these take a LOT of time, for research and testing. So you may see us release the previous types initially as a first-effort mitigation and detection.
 
 ## What's this about?
-These are some kql dumps for Azure Sentinel analytics, these help detect bad behaviour within a network. Folder titled 'lolbas' contains rules surrounding abuse of system binaries which is becoming increasingly common for threat actors to use throughout the attack, from initial access -> exfiltration, as they are much less detected, than say a generic malware.exe 
+Folders contain malware-family or APT specific detection packs. 
 
-In the root folder you will find rules surrounding recent breaches/ exploits/ vulnerabilities. 
+We are a non-profit using our own time to build these to protect and help people. If you would like to join us - please email extcomms@cylaris.org as we are always looking for enthusiastic and passionate volunteers.
 
 https://cylaris.org
