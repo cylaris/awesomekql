@@ -30,4 +30,6 @@ Folders contain malware-family or APT specific detection packs.
 
 We are a non-profit using our own time to build these to protect and help people. If you would like to join us - please email extcomms@cylaris.org as we are always looking for enthusiastic and passionate volunteers.
 
+We have dreams further beyond AwesomeKQL. We would like to advise on and develop further projects but we are limited by a small team. Please reach out if you feel you could help.
+
 https://cylaris.org
