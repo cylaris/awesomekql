@@ -1,6 +1,6 @@
 ![alt text](https://static.wixstatic.com/media/fa2da5_a22354e11ada4292a79e0f8c2289b31b~mv2.png/v1/fill/w_243,h_113,al_c,q_85,usm_0.66_1.00_0.01/Monochrome%20on%20Transparent_edited.webp)
 
-# Azure Security Suite - Awesome KQL
+# AWESOMEKQL - Microsoft Security Detection
 
 AwesomeKQL is a repository of latest vulnerability research and detection efforts built by mostly @ntwrite from many references for which I am very grateful. 
 
