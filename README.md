@@ -13,7 +13,7 @@ KQL is the primary querytype used by Microsoft security stack. Queries are built
 We build those to catch the latest vulnerabilities and threats.
 
 The aim for these rules is to use 
-- Network Level IOC's
+- Network Level Indicators
   
 These are a first-effort response which use the earliest possible IOCs uncovered by bad actors exploiting vulnerabilities. Usually unreliable but good    for a first response.
   
