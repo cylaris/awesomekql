@@ -26,7 +26,7 @@ Static Indicators are attributes that artifacts have that have been seen histori
 After analysis is carried out on various research, as well as tests, most malware families and even APT's share many similar traits. This is where we   are able to identify these patterns. Most of our detection packs use this - however these take a LOT of time, for research and testing. So you may see us release the previous types initially as a first-effort mitigation and detection.
 
 ## What's this about?
-Folders contain malware-family or APT specific detection packs. 
+Folders contain malware-family, vulnerability or APT specific detection packs. 
 
 We are a non-profit using our own time to build these to protect and help people. If you would like to join us - please email extcomms@cylaris.org as we are always looking for enthusiastic and passionate volunteers.
 
