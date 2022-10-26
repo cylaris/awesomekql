@@ -1,0 +1,34 @@
+//Cylaris TRG: Microsoft Online Services - Possible Crafted OAuth URL account hijacking via clicked mail link
+//ver 1.1
+//TLP-WHITE
+//falsepositive-rate:unlikely, unless for some reason this is the way you choose to roll out corp apps
+//contact:extcomms@cylaris.org 
+// Find URLs matching MicrosoftOnline OAuth Crafted URL in MDE clicked in any three standard email apps/ browsers. Add more if you use them.
+let short = 1h;
+let browsers = dynamic(["chrome.exe", "msedge.exe", "firefox.exe", "iexplore.exe", "opera.exe", "brave.exe"]);
+DeviceEvents
+| where TimeGenerated > ago(short) and FileName in~ (browsers)
+| extend InitiatingProcessCommandLine = parse_json(InitiatingProcessCommandLine)
+| mvexpand InitiatingProcessCommandLine
+| where InitiatingProcessCommandLine contains "http" and (InitiatingProcessParentFileName =~ "OUTLOOK.EXE" or InitiatingProcessParentFileName =~ "HXOUTLOOK.EXE" or InitiatingProcessParentFileName =~ "WINMAIL.EXE")
+// grabbing mimecast urls
+| extend parse_urls = tostring(iff(InitiatingProcessCommandLine contains "protect-eu.mimecast.com" and (InitiatingProcessCommandLine contains "-url" or InitiatingProcessCommandLine contains "--single-argument"), split(InitiatingProcessCommandLine,'?domain='), ''))
+| extend dynparse_urls = tostring(parse_json(parse_urls)[1])
+| extend mimecast_urls = trim_end('"$',dynparse_urls) | project-away dynparse_urls, parse_urls
+// grabbing non-mimecast urls
+| extend stnd_urls = tostring(iff(InitiatingProcessCommandLine !contains "protect-eu.mimecast.com" and (InitiatingProcessCommandLine contains "-url" or InitiatingProcessCommandLine contains "--single-argument"), split(InitiatingProcessCommandLine,'://'), ''))
+| extend dynparse_urls2 = tostring(parse_json(stnd_urls)[1])
+| extend outlookURL = tostring(iff(isempty(mimecast_urls),dynparse_urls2, strcat(mimecast_urls,dynparse_urls2))) | project-away dynparse_urls2, mimecast_urls, stnd_urls
+| where isnotempty(outlookURL)
+| where outlookURL matches regex @'(?i)login\.microsoftonline\.com\/consumers\/oauth2\/v2\.0\/authorize\?client_id='
+// grab out app info
+| extend outlookURL_clean_params = tostring(trim_start(@'(?i)http.*?/consumers/oauth2/v2\.0/authorize?',outlookURL))
+| extend parameters_Array = split(outlookURL_clean_params,'&')
+| extend AppId = trim_start(@'(?i)client_id=',tostring(parameters_Array[0]))
+//// OAuth AppID Regex Pattern (only for filtering) --> ^.{8}-.{4}-.{4}-.{4}-.{12}$
+//// Optional Join Non-interactive Signin Logs to match on OAuth App IDz
+//| join AADNonInteractiveUserSignInLogs on AppId
+//| where TimeGenerated > ago(short)
+//| summarize count() by UserPrincipalName
+//// Where nobody else uses it
+//| where count_ <= 1
