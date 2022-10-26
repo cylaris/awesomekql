@@ -1,0 +1,23 @@
+//Cylaris TRG: Microsoft Online Services - Possible Crafted OAuth URL account hijacking
+//ver 1.1
+//TLP-WHITE
+//falsepositive-rate:unlikely, unless for some reason this is the way you choose to roll out corp apps
+//contact:extcomms@cylaris.org 
+//Detects links visited that contain oauth authorise
+// Find URLs matching MicrosoftOnline OAuth Crafted URL in MDE
+let golong = 14d;
+let short = 1h;
+DeviceEvents
+| where TimeGenerated > ago(golong)
+| where RemoteUrl matches regex @'(?i)http(s)?://login\.microsoftonline\.com/consumers/oauth2/v2\.0/authorize\?client_id='
+| extend RemoteUrl_clean = tostring(trim_start(@'(?i)http(s)://(www\.)?',RemoteUrl))
+| extend RemoteUrl_clean_params = tostring(trim_start(@'(?i)http.*?/consumers/oauth2/v2\.0/authorize?',RemoteUrl_clean))
+| extend parameters_Array = split(RemoteUrl_clean_params,'&')
+| extend AppId = trim_start(@'(?i)client_id=',tostring(parameters_Array[0]))
+// OAuth AppID Regex Pattern (only for filtering) --> ^.{8}-.{4}-.{4}-.{4}-.{12}$
+// Join Non-interactive Signin Logs to match on OAuth App IDz
+| join AADNonInteractiveUserSignInLogs on AppId
+| where TimeGenerated > ago(short)
+| summarize count() by UserPrincipalName
+// Where nobody else uses it
+| where count_ <= 1
