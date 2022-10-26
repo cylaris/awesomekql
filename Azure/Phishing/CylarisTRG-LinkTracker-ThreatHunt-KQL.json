@@ -1,0 +1,33 @@
+EmailEvents
+| where DeliveryLocation contains "INBOX"
+| join EmailUrlInfo on NetworkMessageId
+//
+//*/*//
+//
+// Change the URL below or comment out to whatever you're looking for (DONT USE HTTP OR WWW.)
+| where Url contains "bit.ly/bfhweuyrgfeuyrfgeuyg"
+//
+// Remember to change above *(YES YOU CAN USE FULL URL... JUST NO HTTPS://WWW.)*
+//*/*//
+//
+| extend Url = tostring(trim_start(@'^(http|https)://',Url))
+| distinct Url
+| join (
+DeviceProcessEvents
+| mvexpand parse_json(InitiatingProcessCommandLine)
+| where InitiatingProcessCommandLine contains "http" and (InitiatingProcessParentFileName =~ "OUTLOOK.EXE" or InitiatingProcessParentFileName =~ "HXOUTLOOK.EXE" or InitiatingProcessParentFileName =~ "WINMAIL.EXE")
+// grabbing mimecast urls
+| extend parse_urls = tostring(iff(InitiatingProcessCommandLine contains "protect-eu.mimecast.com" and (InitiatingProcessCommandLine contains "-url" or InitiatingProcessCommandLine contains "--single-argument"), split(InitiatingProcessCommandLine,'?domain='), ''))
+| extend dynparse_urls = tostring(parse_json(parse_urls)[1])
+| extend mimecast_urls = trim_end('"$',dynparse_urls) | project-away dynparse_urls, parse_urls
+// grabbing non-mimecast urls
+| extend stnd_urls = tostring(iff(InitiatingProcessCommandLine !contains "protect-eu.mimecast.com" and (InitiatingProcessCommandLine contains "-url" or InitiatingProcessCommandLine contains "--single-argument"), split(InitiatingProcessCommandLine,'://'), ''))
+| extend dynparse_urls2 = tostring(parse_json(stnd_urls)[1])
+| extend mailURL = tostring(iff(isempty(mimecast_urls),dynparse_urls2, strcat(mimecast_urls,dynparse_urls2)))
+// hastily grabbing urldefense urls
+| extend dynparse_urls_urldef = tostring(split(dynparse_urls2,'_')) | extend urldefense_urls = tostring(parse_json(dynparse_urls_urldef)[2]) 
+| extend mailURL = tostring(iff(mailURL startswith "urldefense", trim_start(@'^.*?http(s)?:\/(www\.)?',mailURL), mailURL)) | extend mailURL = tostring(trim_end(@'__.*?$',mailURL))
+| project-away stnd_urls, mimecast_urls, dynparse_urls_urldef, dynparse_urls2, urldefense_urls
+)
+// join left table (top table) to join table column
+on $left.Url == $right.mailURL
