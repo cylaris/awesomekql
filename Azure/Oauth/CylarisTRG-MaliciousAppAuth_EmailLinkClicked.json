@@ -22,7 +22,7 @@ DeviceEvents
 | where isnotempty(outlookURL)
 | where outlookURL matches regex @'(?i)login\.microsoftonline\.com\/consumers\/oauth2\/v2\.0\/authorize\?client_id='
 // grab out app info
-| extend outlookURL_clean_params = tostring(trim_start(@'(?i)http.*?/consumers/oauth2/v2\.0/authorize?',outlookURL))
+| extend outlookURL_clean_params = tostring(trim_start(@'(?i)http.*?\/consumers\/oauth2\/v2\.0\/authorize?',outlookURL))
 | extend parameters_Array = split(outlookURL_clean_params,'&')
 | extend AppId = trim_start(@'(?i)client_id=',tostring(parameters_Array[0]))
 //// OAuth AppID Regex Pattern (only for filtering) --> ^.{8}-.{4}-.{4}-.{4}-.{12}$
