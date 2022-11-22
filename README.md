@@ -28,8 +28,6 @@ After analysis is carried out on various research, as well as tests, most malwar
 
 [TOCM]
 
-[TOC]
-
 ##Azure
 **OAuth App Abuse**
 - [Potentially Malicious OAuth app link clicked](https://github.com/cylaris/awesomekql/blob/main/Azure/Oauth/CylarisTRG-MaliciousAppAuth_EmailLinkClicked.json "Potentially Malicious OAuth app link clicked")
