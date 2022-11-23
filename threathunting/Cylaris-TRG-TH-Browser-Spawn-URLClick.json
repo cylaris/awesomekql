@@ -1,0 +1,9 @@
+// Cylaris TRG: Threat Hunt - pull browser-spawned URL clicks
+// Added Domains and trimmed URL, added true,false HTTPS
+DeviceEvents
+| where ActionType contains "BrowserLaunchedToOpenUrl"
+| where AdditionalFields != "{}"
+| extend SafeLinksUrl_ = tostring(AdditionalFields.SafeLinksUrl)
+| extend Safeurl1 = tostring(trimstart(@'http.*?url=',SafeLinksUrl))
+| extend decodedURL = url_decode(url_decode(url_decode(Safeurl1))) | extend isUrlHttps = tostring(iff(decodedURL startswith "https://",'true','false'))| project-away Safeurl1 | extend decodedURL = tostring(trim_start('http(s?)://(www.)?',decodedURL))
+| extend decodedDomain = tostring(trimend('/.*?$',decodedURL)) | project-away SafeLinksUrl
