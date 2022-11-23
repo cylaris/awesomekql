@@ -76,6 +76,6 @@ After analysis is carried out on various research, as well as tests, most malwar
 -[Browser Spawned on URL Click](https://github.com/cylaris/awesomekql/blob/main/threathunting/phishing/CylarisTRG-TH-Browser-Spawn-URLClick.json "Browser Spawned on URL Click")
 
 ## Contributors
-- [Cam]( "")
+- [Cam](https://sorry.wtf "Cam")
 - [Nathan](https://www.linkedin.com/in/nathan-long-739511182/ "Nathan")
-- [Kaya]( "")
+- [Kaya](https://kaya.baby "Kaya")
