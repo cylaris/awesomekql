@@ -1,6 +1,6 @@
 # Cylaris AwesomeKQL 
 
-Cylaris AWESOMEKQL is an **awesome** repository of detection R&D created exclusively by the Cylaris Threat Research Group (TRG) :fa-user-secret:
+Cylaris AWESOMEKQL is an **awesome** repository of detection R&D created exclusively by the Cylaris Threat Research Group (TRG)
 
 This repo is for:
 - SOC Analysts (Threat Hunting) 
