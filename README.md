@@ -22,7 +22,7 @@ After analysis is carried out on various research, as well as tests, most malwar
 # detections - awesomekql
 <img width="300px" border=0 src="https://cylaris.org/assets/cylarisghp.svg"></img>
 
-![](https://img.shields.io/github/commit-activity/m/cylaris/awesomekql?color=purple&style=flat-square) ![](https://img.shields.io/website?down_color=red&style=flat-square&up_color=purple&url=https%3A%2F%2Fcylaris.org) ![](https://img.shields.io/keybase/pgp/cylaris?color=purple&style=flat-square) ![](https://img.shields.io/github/license/cylaris/awesomekql?color=purple&style=flat-square) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
+![](https://img.shields.io/github/commit-activity/m/cylaris/awesomekql?color=purple&style=flat-square) ![](https://img.shields.io/website?down_color=red&style=flat-square&up_color=purple&url=https%3A%2F%2Fcylaris.org) ![](https://img.shields.io/keybase/pgp/cylaris?color=purple&style=flat-square) ![](https://img.shields.io/github/license/cylaris/awesomekql?color=purple&style=flat-square)
 
 
 **Content**
