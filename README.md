@@ -33,9 +33,6 @@ After analysis is carried out on various research, as well as tests, most malwar
 - [Potentially Malicious OAuth app link clicked](https://github.com/cylaris/awesomekql/blob/main/Azure/Oauth/CylarisTRG-MaliciousAppAuth_EmailLinkClicked.json "Potentially Malicious OAuth app link clicked")
 - [Potentially Malicious OAuth app visited](https://github.com/cylaris/awesomekql/blob/main/Azure/Oauth/CylarisTRG-MaliciousAppAuth_LinkVisited.json "Potentially Malicious OAuth app visited")
 
-**Phishing**
-- [Clicked Link tracker](https://github.com/cylaris/awesomekql/blob/main/Azure/Phishing/CylarisTRG-LinkTracker-ThreatHunt-KQL.json "Clicked Link tracker") (map email URL to Endpoint Logs)
-
 ## LOLBAS
 
 **App Installer abuse**
@@ -59,15 +56,26 @@ After analysis is carried out on various research, as well as tests, most malwar
 - [Tracking of the malware Hafnium](https://github.com/cylaris/awesomekql/tree/main/malwaretracking/hafnium "Tracking of the malware Hafnium") Likely aligned with APT40. Known to target US
 
 **QakBot**
-- [Tracking of the QBot/Qakbot malware](https://github.com/cylaris/awesomekql/tree/main/malwaretracking/qbot-tracking "Tracking of the QBot/Qakbot malware") This is a modular information stealer
+- [Tracking of the QBot/Qakbot malware](https://github.com/cylaris/awesomekql/tree/main/malwaretracking/qakbot "Tracking of the QBot/Qakbot malware") This is a modular information stealer
 
 **Ransomware**
 - [Tracking of various ransomware groups + wares](https://github.com/cylaris/awesomekql/tree/main/malwaretracking/ransomware "Tracking of various ransomware groups + wares")
 
 ## Threat Intel
-- [Twitter IOC ingestion inline](https://github.com/cylaris/awesomekql/blob/main/threatintel/cti-twitter-ioc-ingestion.json "Twitter IOC ingestion inline") Pulls from [0xDanielLopez Tweetfeed](https://github.com/0xDanielLopez/TweetFeed "0xDanielLopez Tweetfeed"). Ingests inline. Also includes a [mapped version](https://github.com/cylaris/awesomekql/blob/main/threatintel/cti-twitter-ioc-mapping.json "mapped version"). 
+**Scraping**
+- [Twitter IOC ingestion inline](https://github.com/cylaris/awesomekql/blob/main/threatintel/scraping/cti-twitter-ioc-ingestion.json "Twitter IOC ingestion inline") Pulls from [0xDanielLopez Tweetfeed](https://github.com/0xDanielLopez/TweetFeed "0xDanielLopez Tweetfeed"). Ingests inline. Also includes a [mapped version](https://github.com/cylaris/awesomekql/blob/main/threatintel/scraping/cti-twitter-ioc-mapping.json "mapped version"). 
 
 ## Vulnerabilities Tracking
 - [ProxyNotShell, a Sysmon and W3CIISLog version](https://github.com/cylaris/awesomekql/tree/main/vulnerabilities/ProxyNotShell "ProxyNotShell, a Sysmon and W3CIISLog version")
 - [CVE-2021-28310, DWM. Win32k Elevation of Privilege](https://github.com/cylaris/awesomekql/tree/main/vulnerabilities/cve-2021-28310 "CVE-2021-28310, DWM. Win32k Elevation of Privilege")
 
+## Threat Hunting
+
+**Phishing**
+- [Clicked Link tracker](https://github.com/cylaris/awesomekql/blob/main/threathunting/phishing/CylarisTRG-TH-LinkTracker-KQL.json "Clicked Link tracker") (map email URL to Endpoint Logs)
+-[Browser Spawned on URL Click](https://github.com/cylaris/awesomekql/blob/main/threathunting/phishing/CylarisTRG-TH-Browser-Spawn-URLClick.json "Browser Spawned on URL Click")
+
+## Contributors
+- [Cam]( "")
+- [Nathan](https://www.linkedin.com/in/nathan-long-739511182/ "Nathan")
+- [Kaya]( "")
