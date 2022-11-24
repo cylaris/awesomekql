@@ -78,5 +78,5 @@ After analysis is carried out on various research, as well as tests, most malwar
 ## Contributors
 - [Cam](https://sorry.wtf "Cam")
 - [Nathan](https://www.linkedin.com/in/nathan-long-739511182/ "Nathan")
-- [Kaya](https://kaya.baby "Kaya")
+- [Kaya](https://kaya.baby "Kaya") :female_detective:
 - [Jake](https://www.linkedin.com/in/jake-bolam/ "Jake")
