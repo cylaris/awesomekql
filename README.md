@@ -42,7 +42,7 @@ After analysis is carried out on various research, as well as tests, most malwar
 - [Abuse of the native Win bin Background Intelligent Transfer Service, BITSadmin](https://github.com/cylaris/awesomekql/blob/main/lolbas/lol-bitsadmin-abuse-download.json)
 
 **Certutil Abuse**
-- [Abuse of the native Win bin certutil, certutil.exe](https://github.com/cylaris/awesomekql/blob/main/lolbas/lol-bitsadmin-abuse-download.json "Abuse of the native Win bin certutil")
+- [Abuse of the native Win bin certutil, certutil.exe](https://github.com/cylaris/awesomekql/blob/main/lolbas/lol-certutil-abuse-download.json "Abuse of the native Win bin certutil")
 
 **CScript Abuse**
 - [Abuse of the native Win bin cscript, cscript.exe](https://github.com/cylaris/awesomekql/blob/main/lolbas/lol-cscript-ads-sentinel-kql.txt "Abuse of the native Win bin cscript")
